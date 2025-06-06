@@ -1,32 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'; // Assuming Card is from shadcn
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { PlayCircle } from 'lucide-react'; // Icon for play button overlay
+import { PlayCircle } from 'lucide-react';
 
 interface AlbumCardProps {
   id: string | number;
   title: string;
   artist: string;
   imageUrl: string;
-  albumUrl?: string; // Link to album detail page
-  onPlay?: (albumId: string | number) => void; // Optional: play entire album
+  albumUrl?: string;
+  onPlay?: (albumId: string | number) => void;
 }
 
-const AlbumCard: React.FC<AlbumCardProps> = ({
-  id,
-  title,
-  artist,
-  imageUrl,
-  albumUrl,
-  onPlay,
-}) => {
+const AlbumCard: React.FC<AlbumCardProps> = ({\
+  id,\
+  title,\
+  artist,\
+  imageUrl,\
+  albumUrl,\
+  onPlay,\
+}) => {\
   console.log("Rendering AlbumCard:", title);
 
-  const content = (
-    <Card className="w-full group overflow-hidden transition-all duration-300 hover:shadow-xl bg-neutral-800 border-neutral-700 rounded-lg"> {/* Doraemon theme: Rounded corners, specific bg/border */}
+  const content = (\
+    <Card className="w-full group overflow-hidden transition-all duration-300 hover:shadow-xl bg-card border rounded-lg">
       <CardHeader className="p-0 relative">
-        <AspectRatio ratio={1 / 1} className="bg-neutral-700">
+        <AspectRatio ratio={1 / 1} className="bg-muted">
           <img
             src={imageUrl || '/placeholder.svg'}
             alt={title}
@@ -37,18 +37,17 @@ const AlbumCard: React.FC<AlbumCardProps> = ({
         {onPlay && (
           <button
             onClick={(e) => { e.stopPropagation(); e.preventDefault(); onPlay(id); }}
-            className="absolute bottom-2 right-2 p-2 bg-green-500 text-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none focus:ring-2 focus:ring-green-400" // Doraemon: Use theme play button color (e.g., Doraemon Red or Yellow accent)
+            className="absolute bottom-2 right-2 p-2 bg-accent text-accent-foreground rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:outline-none focus:ring-2 focus:ring-accent"
             aria-label={`Play album ${title}`}
-          >
+          >\
             <PlayCircle size={28} />
           </button>
         )}
       </CardHeader>
       <CardContent className="p-3">
-        <h3 className="text-md font-semibold text-white truncate" title={title}>{title}</h3> {/* Doraemon theme: text color */}
-        <p className="text-xs text-neutral-400 truncate" title={artist}>{artist}</p> {/* Doraemon theme: secondary text color */}
+        <h3 className="text-md font-semibold text-card-foreground truncate" title={title}>{title}</h3>
+        <p className="text-xs text-muted-foreground truncate" title={artist}>{artist}</p>
       </CardContent>
-      {/* CardFooter can be used for additional actions if needed */}
     </Card>
   );
 
@@ -56,6 +55,4 @@ const AlbumCard: React.FC<AlbumCardProps> = ({
     return <Link to={albumUrl} className="block">{content}</Link>;
   }
   return content;
-};
-
-export default AlbumCard;
+};\n\nexport default AlbumCard;
