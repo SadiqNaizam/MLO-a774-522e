@@ -33,72 +33,69 @@ const SearchPage = () => {
 
   const handlePlaySong = (songId: string | number) => {
     console.log(`Play song from search: ${songId}`);
-    // Implement play song logic
   };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(`Searching for: ${searchTerm}`);
-    // Implement search logic here
   };
 
   return (
-    <div className="flex h-screen bg-neutral-950 text-white">
+    <div className="flex h-screen bg-background text-foreground">
       <Sidebar />
       <div className="ml-60 flex-1 flex flex-col overflow-hidden">
-        <ScrollArea className="flex-1 bg-neutral-900">
+        <ScrollArea className="flex-1 bg-background">
           <main className="p-6 pb-[110px]">
-            <form onSubmit={handleSearch} className="flex items-center gap-2 mb-6 sticky top-0 bg-neutral-900 py-4 z-10 -mx-6 px-6">
-              <SearchIcon className="text-neutral-400" />
+            <form onSubmit={handleSearch} className="flex items-center gap-2 mb-6 sticky top-0 bg-background py-4 z-10 -mx-6 px-6 border-b border">
+              <SearchIcon className="text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search for songs, artists, albums..."
-                className="flex-grow bg-neutral-800 border-neutral-700 focus:ring-green-500"
+                className="flex-grow bg-card border-border focus:ring-primary"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               <Button type="submit" variant="ghost">Search</Button>
             </form>
 
-            {searchTerm && (
-              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                <TabsList className="mb-4 bg-neutral-800">
-                  <TabsTrigger value="songs" className="data-[state=active]:bg-neutral-700 data-[state=active]:text-white">Songs</TabsTrigger>
-                  <TabsTrigger value="albums" className="data-[state=active]:bg-neutral-700 data-[state=active]:text-white">Albums</TabsTrigger>
-                  <TabsTrigger value="playlists" className="data-[state=active]:bg-neutral-700 data-[state=active]:text-white">Playlists</TabsTrigger>
-                  <TabsTrigger value="artists" className="data-[state=active]:bg-neutral-700 data-[state=active]:text-white">Artists</TabsTrigger>
+            {searchTerm && (\
+              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">\
+                <TabsList className="mb-4 bg-muted text-muted-foreground">
+                  <TabsTrigger value="songs" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Songs</TabsTrigger>
+                  <TabsTrigger value="albums" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Albums</TabsTrigger>
+                  <TabsTrigger value="playlists" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Playlists</TabsTrigger>
+                  <TabsTrigger value="artists" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Artists</TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="songs">
                   <Heading title="Songs" level={3} className="mb-2" />
                   <div className="space-y-1">
                     {placeholderSongs.map(song => <SongListItem key={song.id} {...song} onPlayPause={handlePlaySong} />)}
-                    {placeholderSongs.length === 0 && <p className="text-neutral-400">No songs found for "{searchTerm}".</p>}
+                    {placeholderSongs.length === 0 && <p className="text-muted-foreground">No songs found for "{searchTerm}".</p>}
                   </div>
                 </TabsContent>
                 <TabsContent value="albums">
                   <Heading title="Albums" level={3} className="mb-2" />
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                     {placeholderAlbums.map(album => <AlbumCard key={album.id} {...album} onPlay={(id) => console.log('Play album', id)} />)}
-                    {placeholderAlbums.length === 0 && <p className="text-neutral-400">No albums found for "{searchTerm}".</p>}
+                    {placeholderAlbums.length === 0 && <p className="text-muted-foreground">No albums found for "{searchTerm}".</p>}
                   </div>
                 </TabsContent>
                 <TabsContent value="playlists">
                   <Heading title="Playlists" level={3} className="mb-2" />
                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                     {placeholderPlaylists.map(pl => <PlaylistCard key={pl.id} {...pl} onPlay={(id) => console.log('Play playlist', id)} />)}
-                    {placeholderPlaylists.length === 0 && <p className="text-neutral-400">No playlists found for "{searchTerm}".</p>}
+                    {placeholderPlaylists.length === 0 && <p className="text-muted-foreground">No playlists found for "{searchTerm}".</p>}
                   </div>
                 </TabsContent>
                  <TabsContent value="artists">
                   <Heading title="Artists" level={3} className="mb-2" />
-                  {/* Placeholder for artist items. Could be similar to AlbumCard or a dedicated ArtistCard */}
-                  <p className="text-neutral-400">Artist results for "{searchTerm}" would show here.</p>
+                  <p className="text-muted-foreground">Artist results for "{searchTerm}" would show here.</p>
                 </TabsContent>
               </Tabs>
             )}
             {!searchTerm && (
-                <div className="text-center text-neutral-500 mt-10">
+                <div className="text-center text-muted-foreground mt-10">
                     <Heading title="Search Music" subtitle="Find your favorite songs, artists, albums, and playlists." level={2} />
                 </div>
             )}
@@ -108,6 +105,4 @@ const SearchPage = () => {
       </div>
     </div>
   );
-};
-
-export default SearchPage;
+};\n\nexport default SearchPage;
