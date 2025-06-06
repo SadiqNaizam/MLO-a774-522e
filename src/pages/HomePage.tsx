@@ -35,10 +35,10 @@ const HomePage = () => {
   };
 
   return (
-    <div className="flex h-screen bg-neutral-950 text-white">
+    <div className="flex h-screen bg-background text-foreground">
       <Sidebar />
       <div className="ml-60 flex-1 flex flex-col overflow-hidden">
-        <ScrollArea className="flex-1 bg-neutral-900">
+        <ScrollArea className="flex-1 bg-background">
           <main className="p-6 pb-[110px]">
             <section className="mb-8">
               <Heading title="New Releases" level={2} className="mb-4" />
@@ -63,7 +63,7 @@ const HomePage = () => {
                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                 {placeholderAlbums.slice(2,5).map(album => ( // Different set for variety
                   <AlbumCard key={album.id} {...album} onPlay={handlePlayAlbum} />
-                ))}
+                ))}\
               </div>
             </section>
           </main>
@@ -72,6 +72,4 @@ const HomePage = () => {
       </div>
     </div>
   );
-};
-
-export default HomePage;
+};\n\nexport default HomePage;
